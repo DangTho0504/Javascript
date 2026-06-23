@@ -1,11 +1,112 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài Tập Tổng Hợp</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-light py-5">
+    <div class="container" style="max-width: 600px">
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h4 class="card-title mb-3 text-secondary">💯 Bài 1: Tính Điểm</h4>
+          <div class="d-flex gap-2">
+            <input
+              type="number"
+              id="diem"
+              class="form-control"
+              placeholder="Nhập điểm"
+            />
+            <button id="kiemTra" class="btn btn-primary px-4">Kiểm tra</button>
+          </div>
+          <p id="ketQua" class="fw-bold mt-3 mb-0"></p>
+        </div>
+      </div>
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h4 class="card-title mb-3 text-secondary">Bài 2: Tính Tuổi</h4>
+          <div class="d-flex gap-2">
+            <input
+              type="date"
+              id="birthday"
+              class="form-control"
+            />
+            <input type="text" name="" id="showAge" class="form-control bg-body-secondary" placeholder="Tuổi hiện tại của bạn" readonly>
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h2 class="card-title text-center mb-4 text-primary">
+            📝 Form Đăng Ký
+          </h2>
+
+          <div class="mb-3">
+            <label for="name" class="form-label fw-semibold"
+              >Họ và tên (*):</label
+            >
+            <input
+              type="text"
+              id="name"
+              class="form-control"
+              placeholder="Nhập họ và tên của bạn"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="birthday" class="form-label fw-semibold"
+              >Ngày sinh:</label
+            >
+            <input type="date" id="birthday" class="form-control" />
+          </div>
+
+          <div class="mb-3">
+            <label for="showAge" class="form-label fw-semibold">Tuổi:</label>
+            <input
+              type="text"
+              id="showAge"
+              class="form-control bg-body-secondary"
+              placeholder="Tuổi của bạn"
+              readonly
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="phone" class="form-label fw-semibold"
+              >Số điện thoại (*):</label
+            >
+            <input
+              type="text"
+              id="phone"
+              class="form-control"
+              placeholder="Nhập số điện thoại"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="address" class="form-label fw-semibold">Địa chỉ:</label>
+            <input
+              type="text"
+              id="address"
+              class="form-control"
+              placeholder="Nhập địa chỉ hiện tại"
+            />
+          </div>
+
+          <button id="btn" class="btn btn-success w-100 py-2 mt-2 fw-bold">
+            Xuất dữ liệu
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="main.js"></script>
-</body>
+  </body>
 </html>
