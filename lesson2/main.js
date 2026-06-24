@@ -43,11 +43,47 @@ const nameInput = document.getElementById("name");
 const phoneInput = document.getElementById("phone");
 const xuatDuLieu = document.getElementById("btn");
 
-xuatDuLieu.addEventListener("click", function (){
-    const name = nameInput.value;
-    const phone = phoneInput.value;
-    if (phone === "" || name === ""){
-        alter("Cảnh báo: Bạn nhập thiếu tên hoặc số điện thoại!");
-        return;
-    }
+xuatDuLieu.addEventListener("click", function () {
+  //Lấy giá trị tên và sđt
+  const name = nameInput.value;
+  const phone = phoneInput.value;
+  // Trước tiên, xóa sạch lỗi cũ (nếu có) để kiểm tra lại từ đầu
+
+  document.getElementById("nameError").textContent = "";
+  document.getElementById("phoneError").textContent = "";
+
+  let hopLe = true; // Biến đánh dấu xem form có sạch lỗi không
+
+  // 1. Kiểm tra riêng cho Tên
+  if (name === "") {
+    document.getElementById("nameError").textContent =
+      "Bạn không được để trống họ tên!";
+    hopLe = false; // Phát hiện có lỗi
+  }
+
+  // 2. Kiểm tra riêng cho Số điện thoại
+  if (phone === "") {
+    document.getElementById("phoneError").textContent =
+      "Bạn không được để trống số điện thoại!";
+    hopLe = false; // Phát hiện có lỗi
+  }
+
+  // 3. Nếu có bất kỳ lỗi nào (hopLe biến thành false), chặn không cho gom Object
+  if (hopLe === false) {
+    return;
+  }
+  if (phone === "" || name === "") {
+    alert("Cảnh báo: Bạn nhập thiếu tên hoặc số điện thoại!");
+    return; //dừng lại luôn k chạy xuống dưới
+  }
+  const user = {
+    hoTen: name,
+    soDienThoai: phone,
+    ngaySinh: birthday.value,
+    tuoi: showAgeInput.value,
+    address: document.getElementById("address").value,
+  };
+  console.log(`Dữ liệu hợp lệ:`);
+  console.log(user);
 });
+
