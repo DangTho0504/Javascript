@@ -79,31 +79,44 @@ xuatDuLieu.addEventListener("click", function () {
 
   // 1. Nhét (push) thông tin người dùng vừa nhập (Object user) vào cuối mảng danh sách chung
   danhSachThanhVien.push(user);
-
-  // 2. Tạo một biến tên là chuoiHTML với giá trị ban đầu là chuỗi rỗng để chuẩn bị gom các dòng bảng
-  let chuoiHTML = "";
-
-  // 3. Chạy vòng lặp qua từng người trong mảng danh sách, mỗi lượt gọi người đó là "thanhVien"
-  danhSachThanhVien.forEach(function (thanhVien, index) {
-    // 4. Lấy chuỗi cũ cộng dồn thêm (`+=`) code HTML tạo dòng (`<tr>`) và các ô (`<td>`) chứa dữ liệu thật của người đó
-    chuoiHTML += `
-        <tr>
-            <td>${thanhVien.hoTen}</td>       <!-- Bắn họ tên của thành viên vào ô thứ nhất -->
-            <td>${thanhVien.soDienThoai}</td> <!-- Bắn số điện thoại vào ô thứ hai -->
-            <td>${thanhVien.tuoi}</td>        <!-- Bắn tuổi vào ô thứ ba -->
-            <td>
-            <button class="btn btn-danger btn-sm" onclick="xoaUser(${index})">Xóa</button>
-        </td>
-            </tr>
-    `;
-  }); // 5. Kết thúc vòng lặp sau khi đã duyệt qua hết tất cả mọi người trong mảng
-
-  // 6. Tìm thẻ có id là "danhSachUser" ở file HTML và nạp (dịch) toàn bộ đống chuỗi HTML vừa gom được thành giao diện bảng thật
-  document.getElementById("danhSachUser").innerHTML = chuoiHTML;
+  veLaiGiaoDienBang();
 
   // 7. Xóa sạch chữ trong ô nhập Họ Tên trên màn hình (đưa về rỗng) để chuẩn bị cho lần nhập sau
   nameInput.value = "";
-
   // 8. Xóa sạch chữ trong ô nhập Số Điện Thoại trên màn hình để chuẩn bị cho lần nhập sau
   phoneInput.value = "";
+  document.getElementById("birthday").value = "";
+  document.getElementById("address").value = "";
+  showAgeInput.value = "";
 });
+
+// BƯỚC 5: TẠO MỘT HÀM RIÊNG ĐỂ CHUYÊN VẼ BẢNG (Giúp code đỡ bị lặp đi lặp lại)
+function veLaiGiaoDienBang() {
+  let chuoiHTML = "";
+
+  // Chú ý: Tớ thêm chữ "index" (số thứ tự 0, 1, 2...) vào trong hàm forEach
+  danhSachThanhVien.forEach(function (thanhVien, index) {
+    chuoiHTML += `
+            <tr>
+                <td>${thanhVien.hoTen}</td>       
+                <td>${thanhVien.soDienThoai}</td> 
+                <td>${thanhVien.tuoi}</td>        
+                <td>
+                    <button class="btn btn-danger btn-sm" onclick="xoaUser(${index})">Xóa</button>
+                </td>
+            </tr>
+        `;
+  });
+
+  // Bắn đống chuỗi HTML vừa tạo vào thẻ tbody trên giao diện
+  document.getElementById("danhSachUser").innerHTML = chuoiHTML;
+}
+
+// BƯỚC 6: HÀM XÓA NGƯỜI (ĐẶT ĐỘC LẬP NGOÀI HÀM CLICK)
+function xoaUser(viTriCanXoa) {
+  // 1. Máy tính tìm đến đúng vị trí (index) của người đó trong mảng và cắt bỏ 1 phần tử
+  danhSachThanhVien.splice(viTriCanXoa, 1);
+
+  // 2. Sau khi trong mảng đã mất đi người đó, ta ra lệnh cho máy tính vẽ lại cái bảng mới tinh
+  veLaiGiaoDienBang();
+}
