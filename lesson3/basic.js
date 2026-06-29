@@ -35,5 +35,5 @@ const danhSachGiaDinh = [
     {hoTen: "Nguyễn Vũ Trường Giang", quanHe: "anh"},
 ];
 danhSachGiaDinh.forEach(function(nguoi){
-            console.log(nguoi.hoTen+" là " + nguoi.quanHe + " của tôi");
+            console.log(nguoi.hoTen + " là " + nguoi.quanHe + " của tôi");
 });
