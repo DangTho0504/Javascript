@@ -1,31 +1,52 @@
-const name = document.getElementById("o-nhap-ten");
-const click = document.getElementById("bam");
-const hello = document.getElementById("hello-name");
+const name = document.getElementById("input-ten");
+const phone = document.getElementById("input-sdt");
+const click = document.getElementById("btn");
+const render = document.getElementById("hien-thi");
+
+const danhBa = [];
 
 click.addEventListener("click", function () {
-  let xuat = name.value;
-  console.log(
-    (hello.innerText = "Xin chao ban " + xuat + " chúc bạn một ngày tốt lạnh."),
-  );
-});
-
-// Danh sách đi chợ
-
-const monAn = document.getElementById("mon-an");
-const press = document.getElementById("nut-them");
-const content = document.getElementById("danh-sach-mua-sam");
-
-const gioHang = [];
-
-press.addEventListener("click", function () {
-  gioHang.push(monAn.value);
-  console.log(gioHang);
+  const thongTin = {
+    ten: name.value,
+    sdt: phone.value,
+  };
+  danhBa.push(thongTin);
   let chuoiHTML = "";
-  gioHang.forEach(function (ten) {
-    chuoiHTML += `<li> ${ten}</li>`;
+  danhBa.forEach(function (user, index) {
+    chuoiHTML += ` <tr>
+                <td>${user.ten}</td>
+
+                <td>${user.sdt}</td>
+
+                <td>
+                    <button onclick="xoaDanhBa(${index})">
+                        Xóa
+                    </button>
+                </td>
+            </tr>`;
   });
-  content.innerHTML = chuoiHTML;
+  render.innerHTML = chuoiHTML;
+  name.value = "";
+  phone.value = "";
 });
+function xoaDanhBa(viTri) {
+  // 1. Dùng lệnh splice để xóa đúng 1 phần tử tại vị trí được bấm
+  danhBa.splice(viTri, 1);
+  let chuoiHTML = "";
+  danhBa.forEach(function (user, index) {
+    chuoiHTML += `   <tr>
+                <td>${user.ten}</td>
 
-// Tạo danh bạ điện thoại
+                <td>${user.sdt}</td>
 
+                <td>
+                    <button onclick="xoaDanhBa(${index})">
+                        Xóa
+                    </button>
+                </td>
+            </tr>`;
+  });
+
+  // Đập lại danh sách mới đã xóa lên màn hình
+  render.innerHTML = chuoiHTML;
+}
