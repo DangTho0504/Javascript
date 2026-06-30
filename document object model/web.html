@@ -3,22 +3,117 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document Object model</title>
+    <title>Quản Lý Danh Bạ Bằng Bảng</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f9;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+      }
+      .container {
+        background: rgb(247, 244, 244);
+        padding: 20px;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 400px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        text-align: center;
+        color: #333;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      #btn {
+        width: 100%;
+        padding: 10px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      /* Style cho Bảng */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 25px;
+      }
+      th, td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+      }
+      th {
+        background-color: #cac0c0;
+      }
+
+      /* Style cho các nút hành động */
+      .btn-xoa {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 5px;
+      }
+      .btn-sua {
+        background-color: #ffc107;
+        color: #212529;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    </style>
   </head>
   <body>
-    <input type="text" id="input-ten" placeholder="Nhập tên bạn vào đây" />
-    <input type="text" id="input-sdt" placeholder="Nhập số điện thoại">
-    <button id="btn">Thêm vào danh bạ</button>
-    
-<table border="1" id="hien-thi">
-    <thead>
-        <tr>
+    <div class="container">
+      <h2>📒 Quản Lý Danh Bạ</h2>
+
+      <div class="form-group">
+        <label for="input-ten">Tên</label>
+        <input type="text" id="input-ten" placeholder="Nhập tên..." />
+        <small id="code_1"></small>
+      </div>
+      <div class="form-group">
+        <label for="input-sdt">SĐT</label>
+        <input type="text" id="input-sdt" placeholder="Nhập SĐT..." />
+        <small id="code_2"></small>
+      </div>
+
+      <button id="btn">Thêm Vào Danh Bạ</button>
+
+      <table>
+        <thead>
+          <tr>
             <th>Tên</th>
             <th>SĐT</th>
-            <th>Xóa</th>
-        </tr>
-    </thead>
-
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody id="danh-sach-body"></tbody>
+      </table>
+    </div>
 
     <script src="code.js"></script>
   </body>
