@@ -144,29 +144,15 @@
     <h2>Todo List ⭐⭐⭐</h2>
     
     <div class="input-group">
-        <input type="text" id="todo-input" placeholder="Thêm công việc mới...">
-        <button class="add-btn" onclick="addTodo()">Thêm</button>
+        <input type="text" id="todo" placeholder="Thêm công việc mới...">
+        <button class="add-btn" id="btn-them">Thêm</button>
     </div>
 
     <ul id="todo-list">
         <li>
-            <div class="todo-content" onclick="toggleComplete(this)">
+            <div>
                 <input type="checkbox" class="checkbox">
                 <span class="todo-text">Học JavaScript</span>
-            </div>
-            <button class="delete-btn" onclick="deleteTodo(this)">🗑️</button>
-        </li>
-        <li>
-            <div class="todo-content" onclick="toggleComplete(this)">
-                <input type="checkbox" class="checkbox">
-                <span class="todo-text">Đi tập gym</span>
-            </div>
-            <button class="delete-btn" onclick="deleteTodo(this)">🗑️</button>
-        </li>
-        <li>
-            <div class="todo-content" onclick="toggleComplete(this)">
-                <input type="checkbox" class="checkbox">
-                <span class="todo-text">Làm Portfolio</span>
             </div>
             <button class="delete-btn" onclick="deleteTodo(this)">🗑️</button>
         </li>
