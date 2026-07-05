@@ -139,3 +139,15 @@ inputTimKiem.addEventListener("input", function() {
     // 3. Gọi hàm vẽ giao diện và truyền cái mảng đã lọc này vào!
     hienThiGiaoDien(mangDaLoc);
 });
+let danhSachSinhVien = [
+    { ten: "An", diem: 9 },
+    { ten: "Bình", diem: 5 },
+    { ten: "Lan", diem: 8 }
+];
+const sinhVien = danhSachSinhVien.filter(function(sv){
+return sv.diem >=8;
+});
+sinhVien.forEach(function(sv){
+console.log(sv.ten);
+console.log(danhSachSinhVien.indexOf(sv));
+});

@@ -8,33 +8,27 @@ const btnSua = document.getElementById("btn-sua");
 const tableBody = document.getElementById("danhSachSinhVien");
 
 // Khai báo dữ liệu
+let duLieuCu = localStorage.getItem("kho");
 let danhSachSinhVien = [];
+if (duLieuCu != null) {
+  danhSachSinhVien = JSON.parse(duLieuCu);
+} else {
+  danhSachSinhVien = [];
+}
 let viTriSua = -1;
-
+hienThiDanhSach();
 // Hàm DOM
 btnThem.addEventListener("click", function () {
   const maSV = inputMaSV.value;
   const ten = inputHoTen.value;
   let diem = Number(inputDiem.value);
   const lop = inputLop.value;
-  let xepLoai = "";
-  // xep hang
-  if (diem >= 8) {
-    xepLoai = "Giỏi";
-  } else if (diem >= 6.5) {
-    xepLoai = "Khá";
-  } else if (diem >= 5) {
-    xepLoai = "Trung Bình";
-  } else {
-    xepLoai = "Yếu";
-  }
+
   if (viTriSua != -1) {
     danhSachSinhVien[viTriSua].maSV = inputMaSV.value;
     danhSachSinhVien[viTriSua].ten = inputHoTen.value;
     danhSachSinhVien[viTriSua].lop = inputLop.value;
     danhSachSinhVien[viTriSua].diem = inputDiem.value;
-    danhSachSinhVien[viTriSua].xepLoai = xepLoai;
-
     btnThem.innerText = "Thêm Sinh Viên";
     btnThem.style.background = "green";
     viTriSua = -1;
@@ -44,39 +38,38 @@ btnThem.addEventListener("click", function () {
       ten: inputHoTen.value,
       diem: inputDiem.value,
       lop: lop,
-      xepLoai: xepLoai,
     };
-     danhSachSinhVien.push(sinhVien);
+    danhSachSinhVien.push(sinhVien);
   }
- 
+
   hienThiDanhSach();
-  inputMaSV.value = "";
-  inputHoTen.value = "";
-  inputLop.value = "";
-  inputDiem.value = "";
+  clearForm();
+  luuStorage();
 });
 
 // Hiển thị table
-function hienThiDanhSach() {
+function hienThiDanhSach(mangHienThi = danhSachSinhVien) {
   let chuoiHTML = "";
-  danhSachSinhVien.forEach(function (user, index) {
-    chuoiHTML += `
- <tr>
-
-                    <td>${user.maSV}</td>
-                    <td>${user.ten}</td>
-                    <td>${user.lop}</td>
-                    <td>${user.diem}</td>
-                    <td>${user.xepLoai}</td>
-                    <td>
-                    <button class = "btn-sua" onclick = "suaSinhVien(${index})">Sửa</button>
-                    <button class = "btn-xoa" onclick = "xoaSinhVien(${index})">Xóa</button>
-                    </td>
-                </tr>
-
-`;
+ 
+  mangHienThi.forEach(function (sv) {
+     let viTriGoc = danhSachSinhVien.findIndex(function (item) {
+    return item.ten == sv.ten;
   });
-  tableBody.innerHTML = chuoiHTML;
+    chuoiHTML += `
+        <tr>
+            <td>${sv.maSV}</td>
+            <td>${sv.ten}</td>
+            <td>${sv.lop}</td>
+            <td>${sv.diem}</td>
+            <td>${xepLoai(sv.diem)}</td>
+            <td>
+                <button class="btn-sua" onclick="suaSinhVien(${viTriGoc})">Sửa</button>
+                <button class="btn-xoa" onclick="xoaSinhVien(${viTriGoc})">Xóa</button>
+            </td>
+        </tr>
+        `;
+    tableBody.innerHTML = chuoiHTML;
+  });
 }
 function xoaSinhVien(viTri) {
   let xacNhan = confirm("Bạn có chắc muốn xóa?");
@@ -84,6 +77,7 @@ function xoaSinhVien(viTri) {
     danhSachSinhVien.splice(viTri, 1);
     hienThiDanhSach();
   }
+  luuStorage();
 }
 function suaSinhVien(viTri) {
   inputMaSV.value = danhSachSinhVien[viTri].maSV;
@@ -93,4 +87,35 @@ function suaSinhVien(viTri) {
   viTriSua = viTri;
   btnThem.innerText = "Xác nhận sửa";
   btnThem.style.background = "orange";
+}
+const inputTimKiem = document.getElementById("inputTimKiem");
+inputTimKiem.addEventListener("input", function () {
+  const timKiem = inputTimKiem.value.trim().toLowerCase();
+  let mangDaLoc = danhSachSinhVien.filter(function (sv) {
+    return sv.ten.toLowerCase().includes(timKiem);
+  });
+  hienThiDanhSach(mangDaLoc);
+});
+
+function luuStorage() {
+  localStorage.setItem("kho", JSON.stringify(danhSachSinhVien));
+}
+function clearForm() {
+  inputMaSV.value = "";
+  inputHoTen.value = "";
+  inputLop.value = "";
+  inputDiem.value = "";
+}
+function xepLoai(diem) {
+
+    if (diem >= 8) {
+        return "Giỏi";
+    } else if (diem >= 6.5) {
+        return "Khá";
+    } else if (diem >= 5) {
+        return "Trung Bình";
+    } else {
+        return "Yếu";
+    }
+
 }
